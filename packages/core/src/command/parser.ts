@@ -346,7 +346,7 @@ export namespace Argv {
   }
 
   export function parseValue(source: string, quoted: boolean, kind: string, argv: Argv, decl: Declaration = {}) {
-    const { name, type } = decl
+    const { name, type = 'string' } = decl
 
     // apply domain callback
     const domain = resolveDomain(type)
@@ -511,7 +511,7 @@ export namespace Argv {
         let { content, quoted } = token
 
         // variadic argument
-        const argDecl = this._arguments[args.length] || lastArgDecl || { type: 'string' }
+        const argDecl = this._arguments[args.length] || lastArgDecl || {}
         if (args.length === this._arguments.length - 1 && argDecl.variadic) {
           lastArgDecl = argDecl
         }
